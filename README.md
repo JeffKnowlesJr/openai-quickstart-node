@@ -28,13 +28,13 @@ The Conversation Context feature enables the bot to maintain a context-aware con
 
 ### How it works
 
-Store conversation history: The bot stores the conversation history for each user or channel in a data structure, such as an object or a Map.
+**Store conversation history**: The bot stores the conversation history for each user or channel in a data structure, such as an object or a Map.
 
-Update conversation history: When a new message is received, the bot appends the message to the corresponding user's or channel's conversation history.
+**Update conversation history**: When a new message is received, the bot appends the message to the corresponding user's or channel's conversation history.
 
-Create API prompt: The bot concatenates the conversation history and the new message to create the prompt for the OpenAI API.
+**Create API prompt**: The bot concatenates the conversation history and the new message to create the prompt for the OpenAI API.
 
-Send prompt to OpenAI API: The concatenated prompt is sent to the OpenAI API, which generates a contextually relevant and coherent response based on the conversation history.
+**Send prompt to OpenAI API**: The concatenated prompt is sent to the OpenAI API, which generates a contextually relevant and coherent response based on the conversation history.
 
 Update conversation history with response: The bot stores the generated response in the conversation history for the user or channel.
 
