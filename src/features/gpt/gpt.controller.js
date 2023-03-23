@@ -1,17 +1,12 @@
 const openai = require('../../config/openai')
 const { createCompletion } = require('./gpt.service')
+const { summarize } = require('./summarizer.service')
 
-const conversationHistory = new Map()
+// ... (other code remains the same)
 
 module.exports = {
   handleMessage: async function (message, prefix) {
-    if (
-      message.author.bot ||
-      !message.content.startsWith(prefix) ||
-      message.channel.type !== 0
-    ) {
-      return
-    }
+    // ... (previous code remains the same)
 
     const channelId = message.channel.id
 
@@ -25,8 +20,10 @@ module.exports = {
       content: userMessage
     })
 
-    const request = conversationHistory
-      .get(channelId)
+    // Summarize the conversation history
+    const summarizedConversation = summarize(conversationHistory.get(channelId))
+
+    const request = summarizedConversation
       .map((message) => {
         return `${message.role}: ${message.content}`
       })
