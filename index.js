@@ -3,15 +3,15 @@ const openai = require('openai')
 const dotenv = require('dotenv')
 const { Client, Intents } = Discord
 
-// Load environment variables from the .env file in the root directory
-dotenv.config({ path: '../.env' })
+// Load environment variables from the .env file
+dotenv.config()
 
 // Retrieve Discord token and OpenAI API key from environment variables
 const DISCORD_TOKEN = process.env.DISCORD_TOKEN
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY
 
 // Set the custom command prefix
-const CUSTOM_COMMAND_PREFIX = '!'
+const CUSTOM_COMMAND_PREFIX = '!gpt'
 
 // Initialize the conversation history object to store context
 const conversationHistory = {}
