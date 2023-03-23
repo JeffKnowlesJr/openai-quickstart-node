@@ -60,8 +60,8 @@ client.on('messageCreate', async (message) => {
     const completion = await openai.createCompletion({
       model: 'text-davinci-003',
       prompt: request,
-      max_tokens: 600,
-      temperature: 0.6
+      max_tokens: 2048, // Increased token limit
+      temperature: 0.6 // The temperature should be between 0 and 1
     })
     const response = completion.data.choices[0].text
     // 10. Send OpenAI response as a message in Discord
