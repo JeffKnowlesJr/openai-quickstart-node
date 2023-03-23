@@ -3,7 +3,7 @@ const openai = require('openai')
 const dotenv = require('dotenv')
 const { Client, Intents } = Discord
 
-// Load environment variables from the .env file
+// Load environment variables from the .env file in the root directory
 dotenv.config()
 
 // Retrieve Discord token and OpenAI API key from environment variables
@@ -11,7 +11,7 @@ const DISCORD_TOKEN = process.env.DISCORD_TOKEN
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY
 
 // Set the custom command prefix
-const CUSTOM_COMMAND_PREFIX = '!gpt'
+const CUSTOM_COMMAND_PREFIX = '!'
 
 // Initialize the conversation history object to store context
 const conversationHistory = {}
@@ -51,8 +51,14 @@ bot.on('messageCreate', async (message) => {
   // Ignore messages from bots
   if (message.author.bot) return
 
+  // Log the received message
+  console.log(`Received message: ${message.content}`)
+
   // Check if the bot is mentioned in the message
   if (message.mentions.has(bot.user)) {
+    // Log that the bot was mentioned
+    console.log(`Bot mentioned in the message: ${message.content}`)
+
     // Remove the bot mention from the message content
     const userMessage = message.content.replace(`<@!${bot.user.id}>`, '').trim()
 
@@ -77,6 +83,9 @@ bot.on('messageCreate', async (message) => {
 
     // Send the bot response in the Discord channel
     await message.channel.send(botResponse)
+
+    // Log the sent response
+    console.log(`Sent response: ${botResponse}`)
   }
 })
 
