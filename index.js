@@ -26,6 +26,8 @@ openai.apiKey = OPENAI_API_KEY
  */
 async function generateGpt4Response(prompt) {
   try {
+    console.log('Sending prompt to OpenAI API:', prompt)
+
     const response = await openai.Completion.create({
       engine: 'gpt-4',
       prompt,
@@ -35,9 +37,14 @@ async function generateGpt4Response(prompt) {
       temperature: 0.7
     })
 
+    console.log(
+      'Received response from OpenAI API:',
+      response.choices[0].text.trim()
+    )
+
     return response.choices[0].text.trim()
   } catch (error) {
-    console.error(error)
+    console.error('Error during OpenAI API call:', error)
   }
 }
 
