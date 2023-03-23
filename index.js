@@ -1,5 +1,6 @@
 const Discord = require('discord.js')
-const openai = require('openai')
+const openai = require('openai').default
+
 const dotenv = require('dotenv')
 const { Client, Intents } = Discord
 
@@ -61,13 +62,12 @@ bot.on('messageCreate', async (message) => {
   // Log the received message
   console.log(`Received message: ${message.content}`)
 
-  // Check if the bot is mentioned in the message
-  if (message.mentions.has(bot.user)) {
-    // Log that the bot was mentioned
-    console.log(`Bot mentioned in the message: ${message.content}`)
-
-    // Remove the bot mention from the message content
-    const userMessage = message.content.replace(`<@!${bot.user.id}>`, '').trim()
+  // Check if the message starts with the custom command prefix
+  if (message.content.startsWith(CUSTOM_COMMAND_PREFIX)) {
+    // Remove the custom command prefix from the message content
+    const userMessage = message.content
+      .substring(CUSTOM_COMMAND_PREFIX.length)
+      .trim()
 
     // Get the conversation ID based on the channel ID
     const conversationId = message.channelId
@@ -99,5 +99,10 @@ bot.on('messageCreate', async (message) => {
 // Log the Discord token before logging in (for troubleshooting)
 console.log('DISCORD_TOKEN:', DISCORD_TOKEN)
 
-// Log in to the Discord bot
+// Log in to Discord with the app's token
 bot.login(DISCORD_TOKEN)
+
+// When the bot is ready, print a message to the console
+bot.on('ready', () => {
+  console.log(`Logged in as ${bot.user.tag}!`)
+})
