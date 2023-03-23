@@ -63,7 +63,7 @@ client.on('messageCreate', async (message) => {
       max_tokens: 2048, // Increased token limit
       temperature: 0.6 // The temperature should be between 0 and 1
     })
-    const response = completion.data.choices[0].text
+    const response = completion.data.cbhoices[0].text
     // 10. Send OpenAI response as a message in Discord
     message.channel.send(response)
   } catch (error) {
